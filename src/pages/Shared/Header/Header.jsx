@@ -2,12 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-      const navLinks=<>
-      <li>Home</li>
-      <li>Contact Us</li>
-      <li>Dashboard</li>
-      <li>Our Menu</li>
-      <li>Our Shop</li>
+      const navLinks = <>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/menu'>Our Menu</Link></li>
+            
+            
       </>
       return (
             <div className="navbar fixed md:w-[85%] bg-opacity-60 bg-black text-white z-10  bg-base-100  ">
@@ -21,13 +20,13 @@ const Header = () => {
                               </ul>
                         </div>
                         <Link to='/' className=' flex flex-col justify-start items-start'>
-                        <span className=' text-3xl font-extrabold'>BISTRO BOSS</span>
-                        <span className=' text-xl tracking-widest block'>RESTAURANT</span>
+                              <span className=' text-3xl font-extrabold'>BISTRO BOSS</span>
+                              <span className=' text-xl tracking-widest block'>RESTAURANT</span>
                         </Link>
                   </div>
                   <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
-                            {navLinks}
+                              {navLinks}
                         </ul>
                   </div>
                   <div className="navbar-end">

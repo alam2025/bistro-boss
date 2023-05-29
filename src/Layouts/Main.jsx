@@ -5,7 +5,7 @@ import Header from '../pages/Shared/Header/Header';
 
 const Main = () => {
       return (
-            <div className=' '>
+            <div className=' flex flex-col min-h-screen'>
                   <Header/>
                   <Outlet/>
                   <Footer/>
