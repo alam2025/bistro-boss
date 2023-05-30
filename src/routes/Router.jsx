@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
 import Home from "../pages/Home/Home/Home";
-import Menu from "../pages/Menu/Menu";
+
+import OurMenu from "../pages/Menu/OurMenu";
 export const  router=createBrowserRouter([
       {
             path:'/',
@@ -13,7 +14,7 @@ export const  router=createBrowserRouter([
                   },
                   {
                         path:'menu',
-                        element:<Menu/>
+                        element:<OurMenu/>
                   }
             ]
       }

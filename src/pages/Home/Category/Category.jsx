@@ -16,7 +16,7 @@ import slide4 from '../../../assets/home/slide4.jpg'
 import slide5 from '../../../assets/home/slide5.jpg'
 const Category = () => {
       return (
-            <div className=' my-12'>
+            <div className=' my-12 md:mx-[10%]'>
                   <SectionTitle subHeading={`From 11:00am to 10:00pm`} 
                   heading={'order online'}/>
                   <Swiper

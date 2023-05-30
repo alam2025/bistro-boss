@@ -1,0 +1,56 @@
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import Cover from '../Shared/Cover/Cover';
+import menuImg from '../../assets/menu/banner3.jpg'
+import dessertbg from '../../assets/menu/dessert-bg.jpeg'
+import pizzabg from '../../assets/menu/pizza-bg.jpg'
+import saladbg from '../../assets/menu/salad-bg.jpg'
+import soupbg from '../../assets/menu/soup-bg.jpg'
+import Menu from '../Home/Menu/Menu';
+import SectionTitle from '../Shared/SectionTitle/SectionTitle';
+import useMenu from '../../UseMenu/useMenu';
+import MenuItems from '../../componets/MenuItems';
+
+
+
+const OurMenu = () => {
+      const [menu]= useMenu();
+
+      const offered = menu.filter(item => item.category === 'offered')
+      const dessert = menu.filter(item => item.category === 'dessert')
+      const pizza = menu.filter(item => item.category === 'pizza')
+      const salad = menu.filter(item => item.category === 'salad')
+      const soup = menu.filter(item => item.category === 'soup')
+      console.log(menu);
+      return (
+            <div className='mb-20'>
+                  <Helmet>
+                        <title>Bistro Boss | Menu</title>
+                  </Helmet>
+
+                  <Cover coverImg={menuImg} title={"Our Menu"} />
+                  <SectionTitle subHeading={"Don't Miss"} heading={"Today's Offers"}></SectionTitle>
+                  <MenuItems items={offered}></MenuItems>
+
+                  {/* dessets option  */}
+
+                  <MenuItems items={dessert} coverImg={dessertbg} title={"DEsserts"}></MenuItems>
+
+                  {/* pizza option  */}
+
+                  <MenuItems items={pizza} coverImg={pizzabg} title={"Pizzas"}></MenuItems>
+
+                  {/* salad option  */}
+
+                  <MenuItems items={salad} coverImg={saladbg} title={"salads"}></MenuItems>
+
+                  {/* salad option  */}
+
+                  <MenuItems items={soup} coverImg={soupbg} title={"soups"}></MenuItems>
+                 
+               
+            </div>
+      );
+};
+
+export default OurMenu;

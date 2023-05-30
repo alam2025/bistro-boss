@@ -24,7 +24,7 @@ const Chefs = () => {
                   })
       }, [])
       return (
-            <div>
+            <div className='mx-[10%]'>
                   <SectionTitle heading={'popoular chefs'} subHeading={'Should Try'}></SectionTitle>
 
                   <Swiper
