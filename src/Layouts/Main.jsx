@@ -1,15 +1,18 @@
 import React from 'react';
 import Footer from '../pages/Shared/Footer/Footer';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../pages/Shared/Header/Header';
 
 const Main = () => {
+      const location = useLocation();
+      const noheaderFooter = location.pathname.includes('login')
+      // console.log(noheaderFooter);
       return (
             <div className=' flex flex-col min-h-screen'>
-                  <Header/>
-                  <Outlet/>
-                  <Footer/>
-                  
+                  {noheaderFooter || <Header />}
+                  <Outlet />
+                  {noheaderFooter || <Footer />}
+
             </div>
       );
 };

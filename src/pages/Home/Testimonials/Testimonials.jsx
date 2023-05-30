@@ -16,13 +16,13 @@ import '@smastrom/react-rating/style.css'
 const Testimonials = () => {
       const [reviews, setReview] = useState([])
       useEffect(() => {
-            fetch('/reviews.json')
+            fetch('http://localhost:5000/reviews')
                   .then(res => res.json())
                   .then(data => {
                         setReview(data)
                   })
       }, [])
-      console.log(reviews);
+      // console.log(reviews);
       return (
             <section className=' mx-[10%]'>
                   <SectionTitle subHeading={'What Our Client Says'} heading={'Testimonials'}></SectionTitle>
