@@ -9,7 +9,7 @@ import soupbg from '../../assets/menu/soup-bg.jpg'
 import Menu from '../Home/Menu/Menu';
 import SectionTitle from '../Shared/SectionTitle/SectionTitle';
 import useMenu from '../../UseMenu/useMenu';
-import MenuItems from '../../componets/MenuItems';
+import MenuItems from './MenuItems';
 
 
 
@@ -21,7 +21,7 @@ const OurMenu = () => {
       const pizza = menu.filter(item => item.category === 'pizza')
       const salad = menu.filter(item => item.category === 'salad')
       const soup = menu.filter(item => item.category === 'soup')
-      console.log(menu);
+      // console.log(menu);
       return (
             <div className='mb-20'>
                   <Helmet>
@@ -34,19 +34,19 @@ const OurMenu = () => {
 
                   {/* dessets option  */}
 
-                  <MenuItems items={dessert} coverImg={dessertbg} title={"DEsserts"}></MenuItems>
+                  <MenuItems items={dessert} coverImg={dessertbg} title={"dessert"}></MenuItems>
 
                   {/* pizza option  */}
 
-                  <MenuItems items={pizza} coverImg={pizzabg} title={"Pizzas"}></MenuItems>
+                  <MenuItems items={pizza} coverImg={pizzabg} title={"pizza"}></MenuItems>
 
                   {/* salad option  */}
 
-                  <MenuItems items={salad} coverImg={saladbg} title={"salads"}></MenuItems>
+                  <MenuItems items={salad} coverImg={saladbg} title={"salad"}></MenuItems>
 
                   {/* salad option  */}
 
-                  <MenuItems items={soup} coverImg={soupbg} title={"soups"}></MenuItems>
+                  <MenuItems items={soup} coverImg={soupbg} title={"soup"}></MenuItems>
                  
                
             </div>

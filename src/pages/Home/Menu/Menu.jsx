@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
 import menu1 from '../../../assets/menu/salad-bg.jpg'
 import useMenu from '../../../UseMenu/useMenu';
-import MenuItems from '../../../componets/MenuItems';
+import MenuItems from '../../Menu/MenuItems';
 
 const Menu = () => {
       const [menu] = useMenu();

@@ -1,5 +1,6 @@
 import React from 'react';
-import Cover from '../pages/Shared/Cover/Cover';
+import Cover from '../Shared/Cover/Cover';
+import { Link } from 'react-router-dom';
 
 const MenuItems = ({ items, title, coverImg }) => {
       return (
@@ -15,7 +16,7 @@ const MenuItems = ({ items, title, coverImg }) => {
                                           <img style={{ borderRadius: '0 200px 200px' }} src={m.image} alt="" className=' w-[100px] h-[100px]' />
                                           <div className='flex gap-3'>
                                                 <div>
-                                                      <h3 className='text-2xl'>{m.name} ------------------</h3>
+                                                      <h3 className='text-2xl'>{m.name} -----------</h3>
                                                       <p>{m.recipe}</p>
                                                 </div>
                                                 <p className='text-[#BB8506]'>${m.price}</p>
@@ -23,6 +24,11 @@ const MenuItems = ({ items, title, coverImg }) => {
                                     </div>)
                         }
 
+                  </div>
+                  <div className=' flex flex-col justify-center items-center mt-4 mb-12'>
+                        <Link to={`/shop/${title}`}>
+                              <button className="btn btn-outline border-x-0 border-t-0 border-b-4">Order Your Favourite Food</button>
+                        </Link>
                   </div>
             </div>
       );
