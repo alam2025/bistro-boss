@@ -5,8 +5,9 @@ import Header from '../pages/Shared/Header/Header';
 
 const Main = () => {
       const location = useLocation();
-      const noheaderFooter = location.pathname.includes('login')
+      const noheaderFooter = location.pathname.includes(`login`)|| location.pathname.includes('register')
       // console.log(noheaderFooter);
+      const user={}
       return (
             <div className=' flex flex-col min-h-screen'>
                   {noheaderFooter || <Header />}

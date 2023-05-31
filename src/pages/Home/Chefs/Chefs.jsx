@@ -38,7 +38,7 @@ const Chefs = () => {
                   >
                         <div className=''>
                               {
-                                    menu.map(m => <div className=' mx-8'>
+                                    menu.map((m,index) => <div key={index} className=' mx-8'>
                                           <SwiperSlide key={m._id}>
 
                                                 <div className="card card-compact w-96 bg-base-100 shadow-xl ">

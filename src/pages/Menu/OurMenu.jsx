@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import Cover from '../Shared/Cover/Cover';
 import menuImg from '../../assets/menu/banner3.jpg'
@@ -10,11 +10,18 @@ import Menu from '../Home/Menu/Menu';
 import SectionTitle from '../Shared/SectionTitle/SectionTitle';
 import useMenu from '../../UseMenu/useMenu';
 import MenuItems from './MenuItems';
+import { AuthContext } from '../../provider/AuthProvider';
+import LoadingSpinner from '../../Loader/LoadingSpinner';
 
 
 
 const OurMenu = () => {
       const [menu]= useMenu();
+      const {loading}= useContext(AuthContext);
+
+      if(loading){
+            return <LoadingSpinner/>
+      }
 
       const offered = menu.filter(item => item.category === 'offered')
       const dessert = menu.filter(item => item.category === 'dessert')

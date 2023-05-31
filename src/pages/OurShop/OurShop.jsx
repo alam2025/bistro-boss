@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Cover from '../Shared/Cover/Cover';
 import shop from '../../assets/shop/banner2.jpg';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
@@ -7,8 +7,15 @@ import useMenu from '../../UseMenu/useMenu';
 import OrderTap from './OrderTap';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { AuthContext } from '../../provider/AuthProvider';
+import LoadingSpinner from '../../Loader/LoadingSpinner';
 
 const OurShop = () => {
+      const {loading}= useContext(AuthContext);
+
+      if(loading){
+            return <LoadingSpinner/>
+      }
      
 
       const categories=['salad','pizza','soup','dessert','drink']

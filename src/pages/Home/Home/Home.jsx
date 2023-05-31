@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../../Shared/Header/Header';
 import Banner from '../Banner/Banner';
 import Category from '../Category/Category';
@@ -9,8 +9,14 @@ import Testimonials from '../Testimonials/Testimonials';
 import Featured from '../Featured/Featured';
 import Chefs from '../Chefs/Chefs';
 import { Helmet } from 'react-helmet';
+import { AuthContext } from '../../../provider/AuthProvider';
+import LoadingSpinner from '../../../Loader/LoadingSpinner';
 
 const Home = () => {
+      const {loading}= useContext(AuthContext);
+      if(loading){
+            return <LoadingSpinner/>
+      }
       return (
             <div>
                   <Helmet>

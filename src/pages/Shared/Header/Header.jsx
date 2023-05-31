@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../provider/AuthProvider';
 
 const Header = () => {
+      const {user,logOut}=useContext(AuthContext);
+     
       const navLinks = <>
             <li><Link to='/'>Home</Link></li>
+            
             <li><Link to='/menu'>Our Menu</Link></li>
             <li><Link to='/shop/salad'>Our Shop</Link></li>
-            <li><Link to='/login'>Login</Link></li>
+            <li><Link to='/secret'>Secret</Link></li>
+            {!user ? <li><Link to='/login'>Login</Link></li>
+            :<li><button onClick={()=>logOut().then().catch(error=>console.log(error.message))} className='btn btn-outline'>Logout</button></li>}
+           
             
             
       </>
