@@ -14,7 +14,7 @@ const Login = () => {
       const captchaRef = useRef(null)
       const location = useLocation()
 
-      const {logIn}= useContext(AuthContext);
+      const {logIn,googleSignIn}= useContext(AuthContext);
 
       const from =location.state?.from?.pathname ||'/';
   ;
@@ -35,6 +35,13 @@ const Login = () => {
                   navigate(from, { replace: true });
             })
             .catch(error=>setError(error.message))
+      }
+
+      const handlegooglesignIn=()=>{
+            googleSignIn()
+            .then(()=>{
+                  navigate(from, { replace: true });
+            }).catch(error=>setError(error.message))
       }
 
       const handleValidateCaptcha = (e) => {
@@ -59,6 +66,7 @@ const Login = () => {
                         </div>
                         <div className="card  md:w-1/2    ">
                               <h1 className=' text-center text-2xl font-bold'>Login</h1>
+                              {error && <p className=' text-red-500'>{error}</p>}
                               <form onSubmit={handleFrom} className="card-body">
                                     <div className="form-control">
                                           <label className="label">
@@ -98,7 +106,7 @@ const Login = () => {
                                           <button className="btn btn-circle btn-outline">
                                                 <FaFacebook size={40}/>
                                           </button>
-                                          <button className="btn btn-circle btn-outline">
+                                          <button onClick={handlegooglesignIn} className="btn btn-circle btn-outline">
                                                 <FaGoogle size={40}/>
                                           </button>
                                           <button className="btn btn-circle btn-outline">

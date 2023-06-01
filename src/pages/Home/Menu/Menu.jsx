@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
 import menu1 from '../../../assets/menu/salad-bg.jpg'
-import useMenu from '../../../UseMenu/useMenu';
 import MenuItems from '../../Menu/MenuItems';
+import useMenu from '../../../hooks/useMenu';
 
 const Menu = () => {
       const [menu] = useMenu();

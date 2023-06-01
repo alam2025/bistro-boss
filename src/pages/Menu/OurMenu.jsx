@@ -8,10 +8,10 @@ import saladbg from '../../assets/menu/salad-bg.jpg'
 import soupbg from '../../assets/menu/soup-bg.jpg'
 import Menu from '../Home/Menu/Menu';
 import SectionTitle from '../Shared/SectionTitle/SectionTitle';
-import useMenu from '../../UseMenu/useMenu';
 import MenuItems from './MenuItems';
 import { AuthContext } from '../../provider/AuthProvider';
 import LoadingSpinner from '../../Loader/LoadingSpinner';
+import useMenu from '../../hooks/useMenu';
 
 
 

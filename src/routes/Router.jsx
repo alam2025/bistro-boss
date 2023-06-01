@@ -8,10 +8,12 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
 import Secret from "../pages/Secret/Secret";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 export const  router=createBrowserRouter([
       {
             path:'/',
             element:<Main/>,
+            errorElement:<ErrorPage/>,
             children:[
                   {
                         path:'/',
@@ -36,8 +38,8 @@ export const  router=createBrowserRouter([
                   {
                         path:'secret',
                         element:<PrivateRoute><Secret></Secret></PrivateRoute>
-
-                  }
+                  },
+                  
             ]
       }
 ])
