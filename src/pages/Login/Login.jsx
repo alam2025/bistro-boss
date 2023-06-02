@@ -6,18 +6,20 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Helmet } from 'react-helmet';
+import swal from 'sweetalert';
+
 
 const Login = () => {
-      const [error,setError]= useState('')
-      const navigate= useNavigate()
+      const [error, setError] = useState('')
+      const navigate = useNavigate()
       const [disabled, setDisabled] = useState(true)
       const captchaRef = useRef(null)
       const location = useLocation()
 
-      const {logIn,googleSignIn}= useContext(AuthContext);
+      const { logIn, googleSignIn } = useContext(AuthContext);
 
-      const from =location.state?.from?.pathname ||'/';
-  ;
+      const from = location.state?.from?.pathname || '/';
+
 
       const handleFrom = (e) => {
             e.preventDefault()
@@ -27,21 +29,36 @@ const Login = () => {
             const password = form.password.value;
 
             const user = { email, password }
-            
 
-            logIn(email,password)
-            .then(result=>{
-                  
-                  navigate(from, { replace: true });
-            })
-            .catch(error=>setError(error.message))
+
+            logIn(email, password)
+                  .then(result => {
+
+                        navigate(from, { replace: true });
+                  })
+                  .catch(error => setError(error.message))
       }
 
-      const handlegooglesignIn=()=>{
+      const handlegooglesignIn = () => {
             googleSignIn()
-            .then(()=>{
-                  navigate(from, { replace: true });
-            }).catch(error=>setError(error.message))
+                  .then((result) => {
+                        const user= result.user;
+                        const savedUser = { name: user.displayName, photoURL: user.photoURL, email: user.email }
+                        fetch('http://localhost:5000/users', {
+                              method: 'POST',
+                              headers: {
+                                    'content-type': 'application/json'
+                              },
+                              body: JSON.stringify(savedUser)
+                        })
+                              .then(res => res.json())
+                              .then(data => {
+                                   
+                                    navigate(from, { replace: true });
+                              })
+
+                        
+                  }).catch(error => setError(error.message))
       }
 
       const handleValidateCaptcha = (e) => {
@@ -79,7 +96,7 @@ const Login = () => {
                                                 <span className="label-text">Password</span>
                                           </label>
                                           <input type="password" name='password' placeholder="password" className="input input-bordered" />
-                                          
+
                                     </div>
                                     {/* recapcha */}
                                     <div className="form-control">
@@ -96,21 +113,22 @@ const Login = () => {
                                           <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
                                     </div>
                                     <label className="label">
-                                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                          </label>
+                                          <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    </label>
                               </form>
                               <div className=' flex flex-col gap-4 justify-center items-center'>
                                     <Link to='/register' className=' text-orange-700'>New here? Create a New Account.</Link>
                                     <p>Or , Sign in WIth</p>
+                                    {/* <SocialSignIn/> */}
                                     <div className=' flex gap-4'>
                                           <button className="btn btn-circle btn-outline">
-                                                <FaFacebook size={40}/>
+                                                <FaFacebook size={40} />
                                           </button>
                                           <button onClick={handlegooglesignIn} className="btn btn-circle btn-outline">
-                                                <FaGoogle size={40}/>
+                                                <FaGoogle size={40} />
                                           </button>
                                           <button className="btn btn-circle btn-outline">
-                                                <FaGithub size={40}/>
+                                                <FaGithub size={40} />
                                           </button>
                                     </div>
                               </div>

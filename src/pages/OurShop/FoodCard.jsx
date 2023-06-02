@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+
 import useCart from '../../hooks/useCart';
+import swal from 'sweetalert';
 
 const FoodCard = ({ item }) => {
       const navigate = useNavigate()
@@ -15,7 +16,8 @@ const FoodCard = ({ item }) => {
       
 
 
-      const handleAddToCart = item => {
+      const handleAddToCart = items => {
+            const {_id,name,image,price,recipe}= items;
             if (user && user?.email) {
                   const cartItem={menuItemId:_id, name,image,price,recipe,email:user?.email}
                   fetch(`http://localhost:5000/carts`, {
@@ -30,13 +32,11 @@ const FoodCard = ({ item }) => {
                               refetch()
                               
                               if (data.insertedId) {
-                                    Swal.fire({
-                                          position: 'top-end',
-                                          icon: 'success',
-                                          title: 'Your food has been saved',
-                                          showConfirmButton: false,
-                                          timer: 1500
-                                    })
+                                    swal({
+                                          title: "Good job!",
+                                          text: `You add ${name} to your cart!`,
+                                          icon: "success",
+                                        });
                               }
                         })
             }

@@ -8,8 +8,6 @@ const Header = () => {
       const { user, logOut } = useContext(AuthContext);
       const [cart]= useCart();
 
-     
-      
 
       const navLinks = <>
             <li><Link to='/'>Home</Link></li>
@@ -17,14 +15,14 @@ const Header = () => {
             <li><Link to='/menu'>Our Menu</Link></li>
             <li><Link to='/shop/salad'>Our Shop</Link></li>
             <li><Link to='/secret'>Secret</Link></li>
-            <li><Link to='/'>
+            <li><Link to='/dashboard/my-cart'>
                   <button className="px-4 py-2 mr-4 gap-2 relative">
                         <FaShoppingCart size={25}></FaShoppingCart>
                         <div className="badge badge-secondary absolute  -right-4 top-0">+{cart?cart.length:0}</div>
                   </button>
             </Link></li>
             {!user ? <li><Link to='/login'>Login</Link></li>
-                  : <li><button onClick={() => logOut().then().catch(error => console.log(error.message))} className='btn btn-outline'>Logout</button></li>}
+                  : <li><button onClick={() => logOut().then().catch(error => console.log(error.message))} className='btn btn-outline text-white border-0'>Logout</button></li>}
 
 
 
@@ -46,7 +44,7 @@ const Header = () => {
                         </Link>
                   </div>
                   <div className="navbar-center hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1">
+                        <ul className="menu menu-horizontal px-1 flex  items-center ">
                               {navLinks}
                         </ul>
                   </div>
