@@ -52,7 +52,7 @@ const MyCart = () => {
                   </Helmet>
                   <SectionTitle subHeading={'My Cart'} heading={'Wanna Add More'}></SectionTitle>
 
-                  <div>
+                  <div className=' border p-8 mb-16 shadow-md'>
                         <div className=' flex justify-evenly items-center h-24'>
                               <h3 className=' text-2xl font-semibold'>Total Order : {cart?.length}</h3>
                               <h3 className=' text-2xl font-semibold'>Total Price : ${totalPrice}</h3>

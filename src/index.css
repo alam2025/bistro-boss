@@ -5,3 +5,7 @@
 .drawer-open{
       display: block !important;
 }
+
+.drawer-side a{
+      /* background-color: transparent; */
+}

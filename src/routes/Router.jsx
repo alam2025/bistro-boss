@@ -11,6 +11,9 @@ import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Dashboard from "../Layouts/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart";
+import Menu from "../pages/Dashboard/Menu";
+import Users from "../pages/Dashboard/Users";
+
 export const  router=createBrowserRouter([
       {
             path:'/',
@@ -51,6 +54,13 @@ export const  router=createBrowserRouter([
                   {
                         path:'my-cart',
                         element:<MyCart/>
+                  },
+                  {
+                        path:'menulist',
+                        element:<Menu></Menu>
+                  },{
+                        path:'all-users',
+                        element:<Users/>
                   }
             ]
       }

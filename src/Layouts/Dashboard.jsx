@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { FaBook, FaCalendarAlt, FaFileContract, FaHome, FaShopify, FaShoppingCart, FaStreetView, FaWallet } from "react-icons/fa";
+import { Link, NavLink, Outlet } from 'react-router-dom';
+import { FaBook, FaBookmark, FaCalendarAlt, FaFileContract, FaHome, FaShopify, FaShoppingCart, FaStreetView, FaUserAlt, FaUserCircle, FaUserFriends, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import useCart from '../hooks/useCart';
 import { AiFillShop, AiOutlineMenu, AiTwotoneContacts } from "react-icons/ai";
 import { Helmet } from 'react-helmet';
 
-
+import { TfiMenuAlt } from "react-icons/tfi";
 
 const Dashboard = () => {
       const [cart] = useCart()
+
+      const isAdmin = true;
       return (
             <div className="drawer lg:drawer-open">
                   <Helmet>
@@ -29,22 +31,38 @@ const Dashboard = () => {
                                     <span className=' text-3xl font-extrabold'>BISTRO BOSS</span>
                                     <span className=' text-xl tracking-widest block'>RESTAURANT</span>
                               </div>
-                              <div className="divider "></div>
-                              <li><Link><FaHome />USER HOME</Link></li>
-                              <li><Link><FaCalendarAlt /> RESERVATION</Link></li>
-                              <li><Link><FaWallet /> PAYMENT HISTORY</Link></li>
-                              <li><Link to='/dashboard/my-cart'><FaShoppingCart /> MY CART
-                                    <div className="badge badge-secondary absolute  right-12 top-0">+{cart ? cart.length : 0}</div>
-                              </Link></li>
-                              <li><Link><FaStreetView /> ADD REVIEW</Link></li>
-                              <li><Link><FaBook /> MY BOOKINGS</Link></li>
+
+
+                              {
+                                    isAdmin ? <>
+                                          <div className="divider "></div>
+                                          <li><NavLink to='/user'><FaHome />ADMIN HOME</NavLink></li>
+                                          <li><NavLink to='/reservation'><FaUtensils /> ADD ITEMS</NavLink></li>
+                                          <li><NavLink to='/wallet'><TfiMenuAlt/> MANAGE ITEMS</NavLink></li>
+                                          <li><NavLink to='/wallet'><FaBookmark /> MANAGES BOOKINGS</NavLink></li>
+                                          <li><NavLink to='/dashboard/all-users'><FaUsers />ALL USERS</NavLink></li>
+                                    </>
+                                          : <>
+                                                <div className="divider "></div>
+                                                <li><NavLink to='/user'><FaHome />USER HOME</NavLink></li>
+                                                <li><NavLink to='/reservation'><FaCalendarAlt /> RESERVATION</NavLink></li>
+                                                <li><NavLink to='/wallet'><FaWallet /> PAYMENT HISTORY</NavLink></li>
+                                                <li><NavLink to='/dashboard/my-cart'><FaShoppingCart /> MY CART
+                                                      <div className="badge badge-secondary absolute  right-12 top-0">+{cart ? cart.length : 0}</div>
+                                                </NavLink></li>
+                                                <li><NavLink to='/reviews'><FaStreetView /> ADD REVIEW</NavLink></li>
+                                                <li><NavLink to='books'><FaBook /> MY BOOKINGS</NavLink></li>
+                                          </>
+                              }
+
+
 
                               <div className="divider "></div>
 
-                              <li><Link to='/'><FaHome /> HOME</Link></li>
-                              <li><Link ><AiOutlineMenu />MENU</Link></li>
-                              <li><Link ><FaShopify />SHOP</Link></li>
-                              <li><Link ><AiTwotoneContacts />CONTACT</Link></li>
+                              <li><NavLink to='/'><FaHome /> HOME</NavLink></li>
+                              <li><NavLink to='/dashboard/menulist'><AiOutlineMenu />MENU</NavLink></li>
+                              <li><NavLink to='/shop' ><FaShopify />SHOP</NavLink></li>
+                              <li><NavLink to='/contact'><AiTwotoneContacts />CONTACT</NavLink></li>
 
 
                         </ul>
