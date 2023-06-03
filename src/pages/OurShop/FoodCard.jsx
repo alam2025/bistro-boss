@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import useCart from '../../hooks/useCart';
 import swal from 'sweetalert';
+import axios from 'axios';
 
 const FoodCard = ({ item }) => {
       const navigate = useNavigate()
@@ -20,13 +21,17 @@ const FoodCard = ({ item }) => {
             const {_id,name,image,price,recipe}= items;
             if (user && user?.email) {
                   const cartItem={menuItemId:_id, name,image,price,recipe,email:user?.email}
+                  const token=localStorage.getItem('Access-token')
                   fetch(`http://localhost:5000/carts`, {
                         method: 'POST',
                         headers: {
-                              'content-type': 'application/json'
+                              'content-type': 'application/json',
+                              // 'authorization':`Bearer ${token}`
                         },
                         body: JSON.stringify(cartItem)
                   })
+                  
+
                         .then(res => res.json())
                         .then(data => {
                               refetch()
@@ -41,7 +46,7 @@ const FoodCard = ({ item }) => {
                         })
             }
             else {
-                  Swal.fire({
+                  swal({
                         title: 'Please, login to save food.',
                         icon: 'warning',
                         showCancelButton: true,

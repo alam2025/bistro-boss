@@ -5,43 +5,50 @@ import { AuthContext } from '../../provider/AuthProvider';
 import { FaTrashAlt } from "react-icons/fa";
 import swal from 'sweetalert';
 import { Helmet } from 'react-helmet';
+import ErrorPage from '../ErrorPage/ErrorPage';
+import { useLocation } from 'react-router-dom';
 const MyCart = () => {
       const { user } = useContext(AuthContext)
-      const [cart,refetch] = useCart()
-      
+      const [cart, refetch] = useCart()
+      const navigate = useLocation()
 
-      const totalPrice = cart.reduce((accumulator, currentValue) => {
+
+
+
+
+      const totalPrice = cart?.reduce((accumulator, currentValue) => {
             return (accumulator + currentValue.price)
       }, 0)
 
 
-      const handleDelete=(item)=>{
+
+      const handleDelete = (item) => {
             swal({
                   title: "Are you sure?",
                   text: "Once deleted, you will not be able to recover this imaginary file!",
                   icon: "warning",
                   buttons: true,
                   dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                    fetch(`http://localhost:5000/carts/${item._id}`,{
-                        method:'DELETE'
-                    })
-                    .then(res=>res.json())
-                    .then(data=>{
-                        refetch()
-                        if(data.deletedCount){
-                              swal("Poof! Your imaginary file has been deleted!", {
-                                    icon: "success",
-                                  })
-                        }
+            })
+                  .then((willDelete) => {
+                        if (willDelete) {
+                              fetch(`http://localhost:5000/carts/${item._id}`, {
+                                    method: 'DELETE'
+                              })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                          refetch()
+                                          if (data.deletedCount) {
+                                                swal("Poof! Your imaginary file has been deleted!", {
+                                                      icon: "success",
+                                                })
+                                          }
 
-                    })
-                  } else {
-                    swal("Your imaginary file is safe!");
-                  }
-                });
+                                    })
+                        } else {
+                              swal("Your imaginary file is safe!");
+                        }
+                  });
       }
 
 
@@ -76,10 +83,10 @@ const MyCart = () => {
                                     <tbody>
                                           {/* row 1 */}
                                           {
-                                                cart.map((item,index) => <tr key={item._id}>
+                                                cart.map((item, index) => <tr key={item._id}>
                                                       <th>
                                                             <label>
-                                                                  {index+1}
+                                                                  {index + 1}
                                                             </label>
                                                       </th>
                                                       <td>
@@ -89,7 +96,7 @@ const MyCart = () => {
                                                                               <img src={item.image} alt={item.name} />
                                                                         </div>
                                                                   </div>
-                                                                  
+
                                                             </div>
                                                       </td>
                                                       <td>
@@ -97,7 +104,7 @@ const MyCart = () => {
                                                       </td>
                                                       <td className='flex justify-end'>${item.price}</td>
                                                       <th>
-                                                            <button onClick={()=>handleDelete(item)} className="btn btn-outline bg-orange-300 border-0"><FaTrashAlt size={20}/></button>
+                                                            <button onClick={() => handleDelete(item)} className="btn btn-outline bg-orange-300 border-0"><FaTrashAlt size={20} /></button>
                                                       </th>
                                                 </tr>)
                                           }

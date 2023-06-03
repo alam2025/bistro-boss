@@ -3,12 +3,16 @@ import React from 'react';
 import SectionTitle from '../Shared/SectionTitle/SectionTitle';
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import swal from 'sweetalert';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAuth from '../../hooks/useAuth';
 const Users = () => {
+      const [axiosSecure]= useAxiosSecure()
+      const {user}= useAuth()
       const { refetch, data: users = [] } = useQuery({
             queryKey: ['users'],
             queryFn: async () => {
-                  const res = await fetch(`http://localhost:5000/users`)
-                  return res.json()
+                  const res = await axiosSecure.get(`/users`)
+                  return res.data;
             }
 
       })

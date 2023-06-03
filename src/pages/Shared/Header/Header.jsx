@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../provider/AuthProvider';
+// import { AuthContext } from '../../../provider/AuthProvider';
 import useCart from '../../../hooks/useCart';
 import { FaShoppingCart } from "react-icons/fa";
 import LoadingSpinner from '../../../Loader/LoadingSpinner';
+import useAuth from '../../../hooks/useAuth';
 const Header = () => {
-      const { user, logOut } = useContext(AuthContext);
+      const { user, logOut,loading } = useAuth()
       const [cart]= useCart();
+      if(loading ){
+            return <LoadingSpinner/>
+      }
 
 
       const navLinks = <>
@@ -18,7 +22,7 @@ const Header = () => {
             <li><Link to='/dashboard/my-cart'>
                   <button className="px-4 py-2 mr-4 gap-2 relative">
                         <FaShoppingCart size={25}></FaShoppingCart>
-                        <div className="badge badge-secondary absolute  -right-4 top-0">+{cart?cart.length:0}</div>
+                        <div className="badge badge-secondary absolute  -right-4 top-0">{cart?<>+{cart?.length}</>:''}</div>
                   </button>
             </Link></li>
             {!user ? <li><Link to='/login'>Login</Link></li>

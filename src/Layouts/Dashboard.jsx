@@ -6,11 +6,13 @@ import { AiFillShop, AiOutlineMenu, AiTwotoneContacts } from "react-icons/ai";
 import { Helmet } from 'react-helmet';
 
 import { TfiMenuAlt } from "react-icons/tfi";
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
       const [cart] = useCart()
+      const [isAdmin]=useAdmin()
 
-      const isAdmin = true;
+      // const isAdmin = isAdmin;
       return (
             <div className="drawer lg:drawer-open">
                   <Helmet>
