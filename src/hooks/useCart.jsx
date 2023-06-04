@@ -7,32 +7,33 @@ import useAuth from './useAuth'
 
 
 const useCart = () => {
-      const [axiosSecure]= useAxiosSecure()
-      
-      const { user,loading } = useAuth()
+      const [axiosSecure] = useAxiosSecure()
+
+      const { user, loading } = useAuth()
       // console.log(user);
-      
-      
-      // const token = localStorage.getItem('Access_token');
+
+
+      const token = localStorage.getItem('Access_token');
       const { isLoading, refetch, data: cart = [] } = useQuery({
             queryKey: ['cart', user?.email],
             // enabled:!!localStorage.getItem('Access_token'),
+            // enabled:!loading,
+            // // enabled: !loading && !!user?.email && !!localStorage.getItem("Access_token"),
+            // queryFn: async () => {
+            //       // console.log(token);
+            //       const res = await axiosSecure(`/carts?email=${user?.email}`)
+            //       // console.log(res);
+            //       return res.data;
+            // },
             enabled:!loading,
             queryFn: async () => {
-                  // console.log(token);
-                  const res = await axiosSecure(`/carts?email=${user?.email}`)
-                  // console.log(res);
-                  return res.data;
-            },
-            // enabled:!loading,
-            // queryFn: async () => {
-            //       const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`, {
-            //             headers: {
-            //                   authorization: `Bearer ${token}`
-            //             }
-            //       })
-            //       return res.json()
-            // }
+                  const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`, {
+                        headers: {
+                              authorization: `Bearer ${token}`
+                        }
+                  })
+                  return res.json()
+            }
       })
 
 

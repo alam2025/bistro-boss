@@ -13,54 +13,65 @@ import Dashboard from "../Layouts/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart";
 import Menu from "../pages/Dashboard/Menu";
 import Users from "../pages/Dashboard/Users";
+import AddItem from "../pages/Dashboard/AddItem";
+import AdminRouter from "./AdminRouter";
+import ManageItem from "../pages/Dashboard/ManageItem";
 
-export const  router=createBrowserRouter([
+export const router = createBrowserRouter([
       {
-            path:'/',
-            element:<Main/>,
-            errorElement:<ErrorPage/>,
-            children:[
+            path: '/',
+            element: <Main />,
+            errorElement: <ErrorPage />,
+            children: [
                   {
-                        path:'/',
-                        element:<Home/>
+                        path: '/',
+                        element: <Home />
                   },
                   {
-                        path:'menu',
-                        element:<OurMenu/>
+                        path: 'menu',
+                        element: <OurMenu />
                   },
                   {
-                        path:'shop/:category',
-                        element:<OurShop/>
+                        path: 'shop/:category',
+                        element: <OurShop />
                   },
                   {
-                        path:'login',
-                        element:<Login/>
+                        path: 'login',
+                        element: <Login />
                   },
                   {
-                        path:'register',
-                        element:<Register/>
+                        path: 'register',
+                        element: <Register />
                   },
                   {
-                        path:'secret',
-                        element:<PrivateRoute><Secret></Secret></PrivateRoute>
+                        path: 'secret',
+                        element: <PrivateRoute><Secret></Secret></PrivateRoute>
                   },
-                  
+
             ]
       },
       {
-            path:'dashboard',
-            element: <PrivateRoute><Dashboard/></PrivateRoute>,
-            children:[
+            path: 'dashboard',
+            element: <PrivateRoute><Dashboard /></PrivateRoute>,
+            children: [
                   {
-                        path:'my-cart',
-                        element:<MyCart/>
+                        path: 'my-cart',
+                        element: <MyCart />
                   },
                   {
-                        path:'menulist',
-                        element:<Menu></Menu>
-                  },{
-                        path:'all-users',
-                        element:<Users/>
+                        path: 'menulist',
+                        element: <Menu></Menu>
+                  }, {
+                        path: 'all-users',
+                        element: <Users />
+                  },
+                  {
+                        path:'add-item',
+                        element:<AdminRouter><AddItem/></AdminRouter>
+                  },
+                  {
+                        path:'manageItems',
+                        element:<AdminRouter><ManageItem></ManageItem></AdminRouter>
                   }
             ]
       }

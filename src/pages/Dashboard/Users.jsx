@@ -6,13 +6,22 @@ import swal from 'sweetalert';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
 const Users = () => {
-      const [axiosSecure]= useAxiosSecure()
-      const {user}= useAuth()
+      const [axiosSecure] = useAxiosSecure()
+      const { user } = useAuth()
+      const token = localStorage.getItem('Access_token');
       const { refetch, data: users = [] } = useQuery({
             queryKey: ['users'],
+            // queryFn: async () => {
+            //       const res = await axiosSecure.get(`/users`)
+            //       return res.data;
+            // }
             queryFn: async () => {
-                  const res = await axiosSecure.get(`/users`)
-                  return res.data;
+                  const res = await fetch(`http://localhost:5000/users`, {
+                        headers: {
+                              authorization: `Bearer ${token}`
+                        }
+                  })
+                  return res.json()
             }
 
       })
